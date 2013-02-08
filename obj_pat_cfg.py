@@ -1,4 +1,4 @@
-# $Id: print_obj_reco.py,v 1.1 2012/06/19 02:09:48 sakuma Exp $
+# $Id: obj_pat_cfg.py,v 1.1 2012/06/19 02:58:15 sakuma Exp $
 
 ##____________________________________________________________________________||
 from PhysicsTools.PatAlgos.patTemplate_cfg import *
@@ -15,7 +15,7 @@ switchToPFMET(process, input=cms.InputTag('pfMet'))
 process.source = cms.Source(
     "PoolSource",
     fileNames = cms.untracked.vstring(
-        'file:/afs/cern.ch/cms/Tutorials/TWIKI_DATA/MET/TTJets_AODSIM_524_numEvent100.root'
+        'file:/afs/cern.ch/cms/Tutorials/TWIKI_DATA/MET/TTJets_AODSIM_532_numEvent100.root'
         )
     )
 

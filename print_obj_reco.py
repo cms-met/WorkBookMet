@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # Tai Sakuma <sakuma@fnal.gov>
-# $Id$
+# $Id: print_obj_reco.py,v 1.1 2012/06/19 02:09:48 sakuma Exp $
 import ROOT
 import sys
 import math
@@ -10,7 +10,7 @@ ROOT.gROOT.SetBatch(1)
 
 ##____________________________________________________________________________||
 parser = OptionParser()
-parser.add_option('-i', '--inputPath', default = '/afs/cern.ch/cms/Tutorials/TWIKI_DATA/MET/TTJets_AODSIM_524_numEvent100.root', action = 'store', type = 'string')
+parser.add_option('-i', '--inputPath', default = '/afs/cern.ch/cms/Tutorials/TWIKI_DATA/MET/TTJets_AODSIM_532_numEvent100.root', action = 'store', type = 'string')
 (options, args) = parser.parse_args(sys.argv)
 inputPath = options.inputPath
 

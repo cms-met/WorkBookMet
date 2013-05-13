@@ -1,7 +1,13 @@
-# $Id: obj_pat_cfg.py,v 1.1 2012/06/19 02:58:15 sakuma Exp $
+# $Id: obj_pat_cfg.py,v 1.2 2013/02/08 21:36:16 sakuma Exp $
 
 ##____________________________________________________________________________||
 from PhysicsTools.PatAlgos.patTemplate_cfg import *
+
+##____________________________________________________________________________||
+import FWCore.ParameterSet.VarParsing as VarParsing
+options = VarParsing.VarParsing('analysis')
+options.inputFiles = 'file:/afs/cern.ch/cms/Tutorials/TWIKI_DATA/MET/TTJets_AODSIM_532_numEvent100.root', 
+options.parseArguments()
 
 ##____________________________________________________________________________||
 process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(-1))
@@ -14,9 +20,7 @@ switchToPFMET(process, input=cms.InputTag('pfMet'))
 ##____________________________________________________________________________||
 process.source = cms.Source(
     "PoolSource",
-    fileNames = cms.untracked.vstring(
-        'file:/afs/cern.ch/cms/Tutorials/TWIKI_DATA/MET/TTJets_AODSIM_532_numEvent100.root'
-        )
+    fileNames = cms.untracked.vstring(options.inputFiles)
     )
 
 ##____________________________________________________________________________||

@@ -1,4 +1,4 @@
-# $Id: obj_pat_cfg.py,v 1.3 2013/05/13 19:52:48 sakuma Exp $
+# $Id: obj_pat_cfg.py,v 1.4 2013/05/14 01:11:58 sakuma Exp $
 
 ##____________________________________________________________________________||
 from PhysicsTools.PatAlgos.patTemplate_cfg import *
@@ -7,10 +7,12 @@ from PhysicsTools.PatAlgos.patTemplate_cfg import *
 import FWCore.ParameterSet.VarParsing as VarParsing
 options = VarParsing.VarParsing('analysis')
 options.inputFiles = 'file:/afs/cern.ch/cms/Tutorials/TWIKI_DATA/MET/TTJets_AODSIM_532_numEvent100.root', 
+options.outputFile = 'patTuple.root'
+options.maxEvents = -1
 options.parseArguments()
 
 ##____________________________________________________________________________||
-process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(-1))
+process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(options.maxEvents))
 process.MessageLogger.cerr.FwkReport.reportEvery = 10
 
 ##____________________________________________________________________________||
@@ -33,7 +35,7 @@ process.p = cms.Path(
 )
 
 ##____________________________________________________________________________||
-process.out.fileName = cms.untracked.string('patTuple.root')
+process.out.fileName = cms.untracked.string(options.outputFile)
 process.out.outputCommands = cms.untracked.vstring(
     'drop *',
     'keep patMETs_patMETs__PAT',

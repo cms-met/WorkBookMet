@@ -1,4 +1,4 @@
-# $Id: obj_pat_cfg.py,v 1.2 2013/02/08 21:36:16 sakuma Exp $
+# $Id: obj_pat_cfg.py,v 1.3 2013/05/13 19:52:48 sakuma Exp $
 
 ##____________________________________________________________________________||
 from PhysicsTools.PatAlgos.patTemplate_cfg import *
@@ -12,6 +12,10 @@ options.parseArguments()
 ##____________________________________________________________________________||
 process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(-1))
 process.MessageLogger.cerr.FwkReport.reportEvery = 10
+
+##____________________________________________________________________________||
+# from PhysicsTools.PatAlgos.tools.coreTools import *
+# runOnData(process)
 
 ##____________________________________________________________________________||
 from PhysicsTools.PatAlgos.tools.pfTools import *

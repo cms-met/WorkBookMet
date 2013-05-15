@@ -1,4 +1,4 @@
-# $Id: obj_pat_cfg.py,v 1.2 2013/02/08 21:36:16 sakuma Exp $
+# $Id: met_filters_cfg.py,v 1.1 2013/02/12 19:26:40 sakuma Exp $
 
 ##____________________________________________________________________________||
 import FWCore.ParameterSet.Config as cms
@@ -7,11 +7,19 @@ import FWCore.ParameterSet.Config as cms
 process = cms.Process("FILT")
 
 ##____________________________________________________________________________||
+import FWCore.ParameterSet.VarParsing as VarParsing
+options = VarParsing.VarParsing('analysis')
+options.inputFiles = 'file:/afs/cern.ch/cms/Tutorials/TWIKI_DATA/MET/MET_Run2012C_AOD_532_numEvent100.root', 
+options.outputFile = 'filtered.root'
+options.maxEvents = -1
+options.parseArguments()
+
+##____________________________________________________________________________||
 process.load("FWCore.MessageLogger.MessageLogger_cfi")
 process.load("Configuration.Geometry.GeometryIdeal_cff")
 
 process.options   = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
-process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(-1))
+process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(options.maxEvents))
 
 ##____________________________________________________________________________||
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
@@ -20,9 +28,7 @@ process.GlobalTag.globaltag = cms.string("FT_R_53_V21::All")
 ##____________________________________________________________________________||
 process.source = cms.Source(
     "PoolSource",
-    fileNames = cms.untracked.vstring(
-        'file:/afs/cern.ch/cms/Tutorials/TWIKI_DATA/MET/MET_Run2012C_AOD_532_numEvent100.root'
-        )
+    fileNames = cms.untracked.vstring(options.inputFiles)
     )
 
 ##____________________________________________________________________________||
@@ -35,7 +41,7 @@ process.p = cms.Path(
 ##____________________________________________________________________________||
 process.out = cms.OutputModule(
     "PoolOutputModule",
-    fileName = cms.untracked.string('filtered.root'),
+    fileName = cms.untracked.string(options.outputFile),
     SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('p'))
     )
 

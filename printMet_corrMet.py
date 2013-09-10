@@ -11,7 +11,7 @@ ROOT.gROOT.SetBatch(1)
 
 ##____________________________________________________________________________||
 parser = OptionParser()
-parser.add_option('-i', '--inputPath', default = './corr_reco.root', action = 'store', type = 'string')
+parser.add_option('-i', '--inputPath', default = './corrMet.root', action = 'store', type = 'string')
 (options, args) = parser.parse_args(sys.argv)
 inputPath = options.inputPath
 
@@ -44,11 +44,8 @@ def count(inputPath):
     handleMETs = Handle("std::vector<reco::MET>") 
 
     METCollections = (
-        ("met",                "", "RECO", handleCaloMETs ),
-        ("corMetGlobalMuons",  "", "RECO", handleCaloMETs ),
         ("caloMetT1",          "", "CORR", handleCaloMETs ),
         ("caloMetT1T2",        "", "CORR", handleCaloMETs ),
-        ("pfMet",              "", "RECO", handlePFMETs   ),
         ("pfMetT0rt",          "", "CORR", handlePFMETs   ),
         ("pfMetT0rtT1",        "", "CORR", handlePFMETs   ),
         ("pfMetT0pc",          "", "CORR", handlePFMETs   ),

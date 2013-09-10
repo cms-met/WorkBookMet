@@ -94,7 +94,3 @@ process.e1 = cms.EndPath(
     )
 
 ##____________________________________________________________________________||
-processDumpFile = open('processDump-corr_cfg_04_corrTerms_actual.py', 'w')
-print >> processDumpFile, process.dumpPython()
-
-##____________________________________________________________________________||

@@ -1,4 +1,3 @@
-# $Id: met_filters_cfg.py,v 1.1 2013/02/12 19:26:40 sakuma Exp $
 
 ##____________________________________________________________________________||
 import FWCore.ParameterSet.Config as cms

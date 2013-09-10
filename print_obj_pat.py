@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # Tai Sakuma <sakuma@fnal.gov>
-# $Id: print_obj_reco.py,v 1.1 2012/06/19 02:09:48 sakuma Exp $
 import ROOT
 import sys
 import math

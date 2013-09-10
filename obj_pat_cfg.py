@@ -1,4 +1,3 @@
-# $Id: obj_pat_cfg.py,v 1.4 2013/05/14 01:11:58 sakuma Exp $
 
 ##____________________________________________________________________________||
 from PhysicsTools.PatAlgos.patTemplate_cfg import *

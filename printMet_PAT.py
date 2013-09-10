@@ -9,7 +9,7 @@ ROOT.gROOT.SetBatch(1)
 
 ##____________________________________________________________________________||
 parser = OptionParser()
-parser.add_option('-i', '--inputPath', default = './patTuple.root', action = 'store', type = 'string')
+parser.add_option('-i', '--inputPath', default = './pat_rawMET.root', action = 'store', type = 'string')
 (options, args) = parser.parse_args(sys.argv)
 inputPath = options.inputPath
 

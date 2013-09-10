@@ -6,7 +6,7 @@ from PhysicsTools.PatAlgos.patTemplate_cfg import *
 import FWCore.ParameterSet.VarParsing as VarParsing
 options = VarParsing.VarParsing('analysis')
 options.inputFiles = 'file:/afs/cern.ch/cms/Tutorials/TWIKI_DATA/MET/TTJets_AODSIM_532_numEvent100.root', 
-options.outputFile = 'patTuple.root'
+options.outputFile = 'pat_rawMET.root'
 options.maxEvents = -1
 options.parseArguments()
 

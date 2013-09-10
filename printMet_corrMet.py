@@ -44,8 +44,6 @@ def count(inputPath):
     handleMETs = Handle("std::vector<reco::MET>") 
 
     METCollections = (
-        ("caloMetT1",          "", "CORR", handleCaloMETs ),
-        ("caloMetT1T2",        "", "CORR", handleCaloMETs ),
         ("pfMetT0rt",          "", "CORR", handlePFMETs   ),
         ("pfMetT0rtT1",        "", "CORR", handlePFMETs   ),
         ("pfMetT0pc",          "", "CORR", handlePFMETs   ),
@@ -56,6 +54,8 @@ def count(inputPath):
         ("pfMetT0pcTxy",       "", "CORR", handlePFMETs   ),
         ("pfMetT0pcT1Txy",     "", "CORR", handlePFMETs   ),
         ("pfMetT1Txy",         "", "CORR", handlePFMETs   ),
+        ("caloMetT1",          "", "CORR", handleCaloMETs ),
+        ("caloMetT1T2",        "", "CORR", handleCaloMETs ),
         )
 
 

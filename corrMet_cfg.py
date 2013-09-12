@@ -48,16 +48,16 @@ process.MessageLogger.cerr.FwkReport.reportEvery = 50
 process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(options.maxEvents))
 
 ##____________________________________________________________________________||
+process.load("JetMETCorrections.Type1MET.correctionTermsCaloMet_cff")
+
+##____________________________________________________________________________||
 process.load("JetMETCorrections.Type1MET.correctionTermsPfMetType1Type2_cff")
 
-# process.corrPfMetType1.jetCorrLabel = cms.string("ak5PFL1FastL2L3Residual")
 process.corrPfMetType1.jetCorrLabel = cms.string("ak5PFL1FastL2L3")
+# process.corrPfMetType1.jetCorrLabel = cms.string("ak5PFL1FastL2L3Residual")
 
 ##____________________________________________________________________________||
 process.load("JetMETCorrections.Type1MET.correctionTermsPfMetType0PFCandidate_cff")
-
-##____________________________________________________________________________||
-process.load("JetMETCorrections.Type1MET.correctionTermsCaloMet_cff")
 
 ##____________________________________________________________________________||
 process.load("JetMETCorrections.Type1MET.correctionTermsPfMetType0RecoTrack_cff")
@@ -65,8 +65,8 @@ process.load("JetMETCorrections.Type1MET.correctionTermsPfMetType0RecoTrack_cff"
 ##____________________________________________________________________________||
 process.load("JetMETCorrections.Type1MET.correctionTermsPfMetShiftXY_cff")
 
-# process.corrPfMetShiftXY.parameter = process.pfMEtSysShiftCorrParameters_2012runABCDvsNvtx_data
 process.corrPfMetShiftXY.parameter = process.pfMEtSysShiftCorrParameters_2012runABCDvsNvtx_mc
+# process.corrPfMetShiftXY.parameter = process.pfMEtSysShiftCorrParameters_2012runABCDvsNvtx_data
 
 ##____________________________________________________________________________||
 process.load("JetMETCorrections.Type1MET.correctedMet_cff")

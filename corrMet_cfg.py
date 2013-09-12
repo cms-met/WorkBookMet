@@ -50,6 +50,9 @@ process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(options.maxEv
 ##____________________________________________________________________________||
 process.load("JetMETCorrections.Type1MET.correctionTermsPfMetType1Type2_cff")
 
+# process.corrPfMetType1.jetCorrLabel = cms.string("ak5PFL1FastL2L3Residual")
+process.corrPfMetType1.jetCorrLabel = cms.string("ak5PFL1FastL2L3")
+
 ##____________________________________________________________________________||
 process.load("JetMETCorrections.Type1MET.correctionTermsPfMetType0PFCandidate_cff")
 

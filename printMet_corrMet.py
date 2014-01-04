@@ -58,9 +58,9 @@ def count(inputPath):
         ("pfMetT0pcTxy",       "", "CORR", handlePFMETs   ),
         ("pfMetT0pcT1Txy",     "", "CORR", handlePFMETs   ),
         ("pfMetT1Txy",         "", "CORR", handlePFMETs   ),
-        ("met",                "", "RECO", handleCaloMETs ),
-        ("caloMetT1",          "", "CORR", handleCaloMETs ),
-        ("caloMetT1T2",        "", "CORR", handleCaloMETs ),
+        # ("met",                "", "RECO", handleCaloMETs ),
+        # ("caloMetT1",          "", "CORR", handleCaloMETs ),
+        # ("caloMetT1T2",        "", "CORR", handleCaloMETs ),
         # ("genMetTrue",         "" ,"SIM",  handleGenMETs  ),
         )
 

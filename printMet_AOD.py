@@ -46,7 +46,7 @@ def count(inputPath):
 
     METCollections = (
         ("pfMet",              "", "RECO", handlePFMETs   ),
-        ("met",                "", "RECO", handleCaloMETs ),
+        # ("met",                "", "RECO", handleCaloMETs ),
         # ("genMetTrue",         "" ,"SIM",  handleGenMETs  ),
         )
 

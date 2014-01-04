@@ -18,17 +18,21 @@ inputPath = options.inputPath
 ##____________________________________________________________________________||
 def main():
     
+    printHeader()
+    if getNEvents(inputPath):
+        count(inputPath)
+
+##____________________________________________________________________________||
+def printHeader():
     print '%6s'  % 'run',
+    print '%10s' % 'lumi',
     print '%9s'  % 'event',
-    print '%25s' % 'module',
+    print '%18s' % 'module',
     print '%10s' % 'met.pt',
     print '%10s' % 'met.px',
     print '%10s' % 'met.py',
-    print '%10s'  % 'met.phi',
+    print '%10s' % 'met.phi',
     print
-
-    if getNEvents(inputPath):
-        count(inputPath)
 
 ##____________________________________________________________________________||
 def count(inputPath):
@@ -43,6 +47,7 @@ def count(inputPath):
     handleMETs = Handle("std::vector<reco::MET>") 
 
     METCollections = (
+        ("pfMet",              "", "RECO", handlePFMETs   ),
         ("pfMetT0rt",          "", "CORR", handlePFMETs   ),
         ("pfMetT0rtT1",        "", "CORR", handlePFMETs   ),
         ("pfMetT0pc",          "", "CORR", handlePFMETs   ),
@@ -53,27 +58,29 @@ def count(inputPath):
         ("pfMetT0pcTxy",       "", "CORR", handlePFMETs   ),
         ("pfMetT0pcT1Txy",     "", "CORR", handlePFMETs   ),
         ("pfMetT1Txy",         "", "CORR", handlePFMETs   ),
+        ("met",                "", "RECO", handleCaloMETs ),
         ("caloMetT1",          "", "CORR", handleCaloMETs ),
         ("caloMetT1T2",        "", "CORR", handleCaloMETs ),
+        # ("genMetTrue",         "" ,"SIM",  handleGenMETs  ),
         )
 
 
-    firstEvent = True
     for event in events:
 
         run = event.eventAuxiliary().run()
         lumi = event.eventAuxiliary().luminosityBlock()
         eventId = event.eventAuxiliary().event()
 
-                           
         for METCollection in METCollections:
             handle = METCollection[3]
+
             event.getByLabel(METCollection[0:3], handle)
             met = handle.product().front()
 
             print '%6d'    % run,
+            print '%10d'   % lumi,
             print '%9d'    % eventId,
-            print '%25s'   % METCollection[0],
+            print '%18s'   % METCollection[0],
             print '%10.3f' % met.pt(),
             print '%10.3f' % met.px(),
             print '%10.3f' % met.py(),

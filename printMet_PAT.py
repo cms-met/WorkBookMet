@@ -16,13 +16,34 @@ inputPath = options.inputPath
 ##____________________________________________________________________________||
 def main():
 
+    printHeader()
+    if getNEvents(inputPath):
+        count(inputPath)
+
+##____________________________________________________________________________||
+def printHeader():
+    print '%6s'  % 'run',
+    print '%10s' % 'lumi',
+    print '%9s'  % 'event',
+    print '%18s' % 'module',
+    print '%10s' % 'met.pt',
+    print '%10s' % 'met.px',
+    print '%10s' % 'met.py',
+    print '%10s' % 'met.phi',
+    print
+
+##____________________________________________________________________________||
+def count(inputPath):
+
     files = [inputPath]
 
     events = Events(files)
 
-    handleMETs = Handle("std::vector<pat::MET>") 
+    handlePatMETs = Handle("std::vector<pat::MET>")
 
-    print "    run       lumi      event        mex        mey        met        phi"
+    METCollections = (
+        ("patMETs", '', 'PAT', handlePatMETs),
+        )
 
     for event in events:
 
@@ -30,15 +51,27 @@ def main():
         lumi = event.eventAuxiliary().luminosityBlock()
         eventId = event.eventAuxiliary().event()
 
-        print '%7d %10d %10d' % (run, lumi, eventId),
-        event.getByLabel(("patMETs", '', 'PAT'), handleMETs)
-        met = handleMETs.product().front()
+        for METCollection in METCollections:
+            handle = METCollection[3]
 
-        print '%10.3f' % met.px(),
-        print '%10.3f' % met.py(),
-        print '%10.3f' % met.pt(),
-        print '%10.2f' % (met.phi()/math.pi*180.0),
-        print
+            event.getByLabel(METCollection[0:3], handle)
+            met = handle.product().front()
+
+            print '%6d'    % run,
+            print '%10d'   % lumi,
+            print '%9d'    % eventId,
+            print '%18s'   % METCollection[0],
+            print '%10.3f' % met.pt(),
+            print '%10.3f' % met.px(),
+            print '%10.3f' % met.py(),
+            print '%10.2f' % (met.phi()/math.pi*180.0),
+            print
+
+##____________________________________________________________________________||
+def getNEvents(inputPath):
+    file = ROOT.TFile.Open(inputPath)
+    events = file.Get('Events')
+    return events.GetEntries()
 
 ##____________________________________________________________________________||
 def loadLibraries():

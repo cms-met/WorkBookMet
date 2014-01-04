@@ -25,7 +25,6 @@ def main():
     print '%10s' % 'met.px',
     print '%10s' % 'met.py',
     print '%10s'  % 'met.phi',
-    print '%10s'  % 'sumet',
     print
 
     if getNEvents(inputPath):
@@ -79,7 +78,6 @@ def count(inputPath):
             print '%10.3f' % met.px(),
             print '%10.3f' % met.py(),
             print '%10.2f' % (met.phi()/math.pi*180.0),
-            print '%10.2f' % met.sumEt(),
             print
 
 ##____________________________________________________________________________||

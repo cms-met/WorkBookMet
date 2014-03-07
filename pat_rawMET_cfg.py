@@ -15,23 +15,17 @@ process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(options.maxEv
 process.MessageLogger.cerr.FwkReport.reportEvery = 10
 
 ##____________________________________________________________________________||
-# from PhysicsTools.PatAlgos.tools.coreTools import *
-# runOnData(process)
+process.options.allowUnscheduled = cms.untracked.bool(True)
 
 ##____________________________________________________________________________||
-from PhysicsTools.PatAlgos.tools.pfTools import *
-switchToPFMET(process, input=cms.InputTag('pfMet'))
+process.load("PhysicsTools.PatAlgos.producersLayer1.metProducer_cff")
+process.patMETs.metSource  = cms.InputTag("pfMet")
 
 ##____________________________________________________________________________||
 process.source = cms.Source(
     "PoolSource",
     fileNames = cms.untracked.vstring(options.inputFiles)
     )
-
-##____________________________________________________________________________||
-process.p = cms.Path(
-    process.patDefaultSequence
-)
 
 ##____________________________________________________________________________||
 process.out.fileName = cms.untracked.string(options.outputFile)

@@ -21,6 +21,12 @@ options.register ('certFile',
                                VarParsing.varType.string,
                                "json file")
 
+options.register ('triggerConditions',
+                  '',
+                  VarParsing.multiplicity.list,
+                  VarParsing.varType.string,
+                  "Trigger Condition")
+
 
 options.parseArguments()
 
@@ -49,5 +55,16 @@ process.Out = cms.OutputModule("PoolOutputModule",
 
 if options.maxSize:
     process.Out.maxSize = cms.untracked.int32 (options.maxSize)
+
+if options.triggerConditions:
+    process.load('HLTrigger.HLTfilters.triggerResultsFilter_cfi')
+    process.triggerResultsFilter.l1tResults = cms.InputTag('')
+    process.triggerResultsFilter.hltResults = cms.InputTag('TriggerResults::HLT')
+    process.triggerResultsFilter.triggerConditions = (options.triggerConditions)
+    process.p = cms.Path(process.triggerResultsFilter)
+    process.Out.SelectEvents = cms.untracked.PSet( SelectEvents = cms.vstring('p'))
+    process.load("FWCore.MessageLogger.MessageLogger_cfi")
+    process.MessageLogger.cerr.FwkReport.reportEvery = 100
+    process.options   = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
 
 process.end = cms.EndPath(process.Out)

@@ -9,7 +9,7 @@ ROOT.gROOT.SetBatch(1)
 
 ##____________________________________________________________________________||
 parser = OptionParser()
-parser.add_option('-i', '--inputPath', default = '/afs/cern.ch/cms/Tutorials/TWIKI_DATA/MET/TTJets_AODSIM_532_numEvent100.root', action = 'store', type = 'string')
+parser.add_option('-i', '--inputPath', default = '/eos/uscms/store/user/cmsdas/2014/MET/ZeroBias_Run2012C_22Jan2013-v1_AOD_numEvent1000.root', action = 'store', type = 'string')
 (options, args) = parser.parse_args(sys.argv)
 inputPath = options.inputPath
 

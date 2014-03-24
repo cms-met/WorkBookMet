@@ -25,7 +25,6 @@ def printHeader():
     print '%6s'  % 'run',
     print '%10s' % 'lumi',
     print '%9s'  % 'event',
-    print '%18s' % 'module',
     print '%10s' % 'met.pt',
     print '%10s' % 'met.px',
     print '%10s' % 'met.py',
@@ -39,16 +38,7 @@ def count(inputPath):
 
     events = Events(files)
 
-    handleGenMETs = Handle("std::vector<reco::GenMET>")
     handlePFMETs = Handle("std::vector<reco::PFMET>")
-    handleCaloMETs = Handle("std::vector<reco::CaloMET>")
-    handleMETs = Handle("std::vector<reco::MET>")
-
-    METCollections = (
-        ("pfMet",              "", "RECO", handlePFMETs   ),
-        # ("met",                "", "RECO", handleCaloMETs ),
-        # ("genMetTrue",         "" ,"SIM",  handleGenMETs  ),
-        )
 
     for event in events:
 
@@ -56,21 +46,17 @@ def count(inputPath):
         lumi = event.eventAuxiliary().luminosityBlock()
         eventId = event.eventAuxiliary().event()
 
-        for METCollection in METCollections:
-            handle = METCollection[3]
+        event.getByLabel(("pfMet", "", "RECO"), handlePFMETs)
+        met = handlePFMETs.product().front()
 
-            event.getByLabel(METCollection[0:3], handle)
-            met = handle.product().front()
-
-            print '%6d'    % run,
-            print '%10d'   % lumi,
-            print '%9d'    % eventId,
-            print '%18s'   % METCollection[0],
-            print '%10.3f' % met.pt(),
-            print '%10.3f' % met.px(),
-            print '%10.3f' % met.py(),
-            print '%10.2f' % (met.phi()/math.pi*180.0),
-            print
+        print '%6d'    % run,
+        print '%10d'   % lumi,
+        print '%9d'    % eventId,
+        print '%10.3f' % met.pt(),
+        print '%10.3f' % met.px(),
+        print '%10.3f' % met.py(),
+        print '%10.2f' % (met.phi()/math.pi*180.0),
+        print
 
 ##____________________________________________________________________________||
 def getNEvents(inputPath):

@@ -3,7 +3,7 @@ import FWCore.ParameterSet.Config as cms
 ##____________________________________________________________________________||
 import FWCore.ParameterSet.VarParsing as VarParsing
 options = VarParsing.VarParsing('analysis')
-options.inputFiles = 'file:/afs/cern.ch/cms/Tutorials/TWIKI_DATA/MET/TTJets_AODSIM_532_numEvent100.root',
+options.inputFiles = 'file:/eos/uscms/store/user/cmsdas/2014/MET/TTJets_AODSIM_532_numEvent100.root',
 options.outputFile = 'corrMet.root'
 options.maxEvents = -1
 options.parseArguments()

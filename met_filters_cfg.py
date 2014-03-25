@@ -8,7 +8,7 @@ process = cms.Process("FILT")
 ##____________________________________________________________________________||
 import FWCore.ParameterSet.VarParsing as VarParsing
 options = VarParsing.VarParsing('analysis')
-options.inputFiles = 'file:/afs/cern.ch/cms/Tutorials/TWIKI_DATA/MET/MET_Run2012C_AOD_532_numEvent100.root', 
+options.inputFiles = 'file:/eos/uscms/store/user/cmsdas/2014/MET/MET120_Run2012C_22Jan2013-v1_AOD_numEvent201.root',
 options.outputFile = 'filtered.root'
 options.maxEvents = -1
 options.parseArguments()

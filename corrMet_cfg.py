@@ -14,7 +14,7 @@ process = cms.Process("CORR")
 ##____________________________________________________________________________||
 process.load("FWCore.MessageLogger.MessageLogger_cfi")
 
-process.load("Configuration.StandardSequences.Geometry_cff")
+process.load("Configuration.Geometry.GeometryIdeal_cff")
 process.load("Configuration.StandardSequences.MagneticField_cff")
 
 ##____________________________________________________________________________||

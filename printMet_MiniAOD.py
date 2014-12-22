@@ -3,13 +3,18 @@
 import ROOT
 import sys
 import math
+import signal
 from optparse import OptionParser
 
 ROOT.gROOT.SetBatch(1)
 
 ##____________________________________________________________________________||
+GLOBAL_LAST = False
+
+##____________________________________________________________________________||
 parser = OptionParser()
 parser.add_option('-i', '--inputPath', default = '/afs/cern.ch/cms/Tutorials/TWIKI_DATA/MET/TTJets_AODSIM_532_numEvent100.root', action = 'store', type = 'string')
+parser.add_option("-n", "--nevents", action = "store", default = -1, type = 'long', help = "maximum number of events to process")
 (options, args) = parser.parse_args(sys.argv)
 inputPath = options.inputPath
 
@@ -34,20 +39,23 @@ def printHeader():
 ##____________________________________________________________________________||
 def count(inputPath):
 
+    signal.signal(signal.SIGINT, handler)
+
     files = [inputPath]
+    events = Events(files, maxEvents = options.nevents)
 
-    events = Events(files)
-
-    handlePFMETs = Handle("std::vector<reco::PFMET>")
+    handlePatMETs = Handle("std::vector<pat::MET>")
 
     for event in events:
+
+        if GLOBAL_LAST: break
 
         run = event.eventAuxiliary().run()
         lumi = event.eventAuxiliary().luminosityBlock()
         eventId = event.eventAuxiliary().event()
 
-        event.getByLabel(("pfMet", "", "RECO"), handlePFMETs)
-        met = handlePFMETs.product().front()
+        event.getByLabel(("slimmedMETs", "", "PAT"), handlePatMETs)
+        met = handlePatMETs.product().front()
 
         print '%6d'    % run,
         print '%10d'   % lumi,
@@ -56,6 +64,7 @@ def count(inputPath):
         print '%10.3f' % met.px(),
         print '%10.3f' % met.py(),
         print '%10.2f' % (met.phi()/math.pi*180.0),
+        print met.nCorrections(),
         print
 
 ##____________________________________________________________________________||
@@ -63,6 +72,11 @@ def getNEvents(inputPath):
     file = ROOT.TFile.Open(inputPath)
     events = file.Get('Events')
     return events.GetEntries()
+
+##____________________________________________________________________________||
+def handler( signum, frame ):
+    global GLOBAL_LAST
+    GLOBAL_LAST = True
 
 ##____________________________________________________________________________||
 def loadLibraries():

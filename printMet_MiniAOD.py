@@ -51,6 +51,8 @@ def count(inputPath):
     handleVertices = Handle("std::vector<reco::Vertex>")
     handlePUSummaries = Handle("std::vector<PileupSummaryInfo>")
 
+    # handlePFMETs = Handle("std::vector<reco::PFMET>")
+
     for event in events:
 
         if GLOBAL_LAST: break
@@ -115,6 +117,17 @@ def count(inputPath):
         print '%10.3f' % genMET.py(),
         print '%10.3f' % (genMET.phi()/math.pi*180.0),
         print
+
+        # # get "MVA PF MET"
+        # event.getByLabel("pfMVAMEt", handlePFMETs)
+        # mvamet = handlePFMETs.product().front()
+        # print '%6d %10d %9d %5d %5d' % (run, lumi, eventId, nInTimePileUp, nVertices),
+        # print '%25s'   % '"MVA PF MET"',
+        # print '%10.3f' % mvamet.pt(),
+        # print '%10.3f' % mvamet.px(),
+        # print '%10.3f' % mvamet.py(),
+        # print '%10.3f' % (mvamet.phi()/math.pi*180.0),
+        # print
 
 ##____________________________________________________________________________||
 def getNEvents(inputPath):

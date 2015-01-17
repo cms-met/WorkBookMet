@@ -34,7 +34,7 @@ def count(inputPath):
     files = [inputPath]
     events = Events(files, maxEvents = options.nevents)
 
-    handleTriggerResults = Handle("edm::TriggerResults") 
+    handleTriggerResults = Handle("edm::TriggerResults")
 
     counts = { }
     for event in events:
@@ -54,7 +54,9 @@ def count(inputPath):
 
 ##____________________________________________________________________________||
 def printHeader():
-    print 'trg n'
+    print '%40s' % 'filter',
+    print '%5s' % 'n',
+    print
 
 ##____________________________________________________________________________||
 def printCounts(counts):
@@ -62,9 +64,9 @@ def printCounts(counts):
     keys.sort()
     # colSize = max([len(k[0]) for k in keys])
     for k in keys:
-        print '%90s' % k[0],
-        print '%5d' % counts[k],
-        print 
+        print '%40s' % k[0],
+        print '%5d'  % counts[k],
+        print
 
 ##____________________________________________________________________________||
 def getNEvents(inputPath):

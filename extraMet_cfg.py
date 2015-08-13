@@ -3,7 +3,8 @@ import FWCore.ParameterSet.Config as cms
 ##____________________________________________________________________________||
 import FWCore.ParameterSet.VarParsing as VarParsing
 options = VarParsing.VarParsing('analysis')
-options.inputFiles = 'file:/afs/cern.ch/cms/Tutorials/TWIKI_DATA/MET/TTJets_MINIAODSIM_PHYS14_numEvent5000.root',
+options.inputFiles = 'file:TTJets_MINIAODSIM_Spring14_numEvent5000.root',
+#options.inputFiles = 'file:/afs/cern.ch/cms/Tutorials/TWIKI_DATA/MET/TTJets_MINIAODSIM_PHYS14_numEvent5000.root',
 options.outputFile = 'extMet.root'
 options.maxEvents = -1
 options.parseArguments()
